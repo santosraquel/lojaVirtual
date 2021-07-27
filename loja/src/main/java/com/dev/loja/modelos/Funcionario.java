@@ -25,6 +25,7 @@ public class Funcionario implements Serializable{
 	private Long id;
 
 	private String nome;
+	private String cpf;
 	private Double salarioBruto;
     @Temporal(TemporalType.DATE)
 	private Date dataEntrada;
@@ -72,6 +73,14 @@ public class Funcionario implements Serializable{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
+	public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
 
 	public Double getSalarioBruto() {
 		return salarioBruto;

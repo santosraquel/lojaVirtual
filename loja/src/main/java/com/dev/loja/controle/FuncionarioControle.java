@@ -6,13 +6,16 @@ import javax.validation.Valid;
 
 import com.dev.loja.modelos.Funcionario;
 import com.dev.loja.repositorios.FuncionarioRepositorio;
+import com.dev.loja.utilitarios.ValidaCPF;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -54,6 +57,15 @@ public class FuncionarioControle {
             return cadastrar(funcionario);
         }
         funcionarioRepositorio.saveAndFlush(funcionario);
+        return cadastrar(new Funcionario());
+    }
+    public ModelAndView validarCpf(@RequestParam(name = "cpf") String cpf, Model model){
+        Boolean cpfValido = false;
+        if(ValidaCPF.isCPF(cpf)){
+            cpfValido = true;
+        }
+
+        model.addAttribute("cpfValido", cpfValido);
         return cadastrar(new Funcionario());
     }
 }
