@@ -175,6 +175,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Nome</th>
+                                <th>CPF</th>
                                 <th>Cargo</th>
                                 <th>Salário Bruto</th>
                                 <th>Ação</th>
@@ -184,6 +185,7 @@
                             <tr th:each="funcionario : ${listaFuncionarios}">
                                 <td th:text="${funcionario.id}"></td>
                                 <td th:text="${funcionario.nome}"></td>
+                                <td th:text="${funcionario.cpf}"></td>
                                 <td th:text="${funcionario.cargo}"></td>
                                 <td th:text="${funcionario.salarioBruto}"></td>
 
