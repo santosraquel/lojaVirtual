@@ -43,7 +43,7 @@ public class Estado implements Serializable{
 		this.nome = nome;
 	}
 
-	public Double getSigla() {
+	public String getSigla() {
 		return sigla;
 	}
 
