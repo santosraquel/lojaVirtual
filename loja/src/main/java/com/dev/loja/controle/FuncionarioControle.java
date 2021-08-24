@@ -20,11 +20,15 @@ public class FuncionarioControle {
 
     @Autowired
     private FuncionarioRepositorio funcionarioRepositorio;
+    
+    @Autowired
+    private CidadeRepositorio cidadeRepositorio;
 
     @GetMapping("/administrativo/funcionarios/cadastrar")
     public ModelAndView cadastrar(Funcionario funcionario){
         ModelAndView mv = new ModelAndView("administrativo/funcionarios/cadastro");
         mv.addObject("funcionario", funcionario);
+        mv.addObject("listaCidades", cidadeRepositorio.findAll());
         return mv;
     }
     

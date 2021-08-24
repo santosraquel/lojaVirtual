@@ -19,7 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class EstadoControle {
 
     @Autowired
-    private EstadooRepositorio estadoRepositorio;
+    private EstadoRepositorio estadoRepositorio;
 
     @GetMapping("/administrativo/estados/cadastrar")
     public ModelAndView cadastrar(Estado estado){
