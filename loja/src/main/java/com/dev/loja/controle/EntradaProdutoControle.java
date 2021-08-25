@@ -18,18 +18,28 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class EntradaProdutoControle {
 
+    private List<EntradaItens> listaEntrada = new ArrayList<EntradaItens>(); 
+
     @Autowired
     private EntradaProdutoRepositorio entradaProdutoRepositorio;
     
     @Autowired
     private EntradaItensRepositorio entradaItensRepositorio;
 
+    @Autowired
+    private FuncionarioRepositorio funcionarioRepositorio;
+
+    @Autowired
+    private ProdutoRepositorio produtoRepositorio;
+
     @GetMapping("/administrativo/entrada/cadastrar")
-    public ModelAndView cadastrar(EntradaProduto entrada, List<EntradaItens> listaEntradaItens, EntradaItens entradaItens){
+    public ModelAndView cadastrar(EntradaProduto entrada, EntradaItens entradaItens){
         ModelAndView mv = new ModelAndView("administrativo/entrada/cadastro");
         mv.addObject("entrada", entrada);
-        mv.addObject("listaEntradaItens", listaEntradaItens);
+        mv.addObject("listaEntradaItens", this.listaEntrada);
         mv.addObject("entradaItens", entradaItens);
+        mv.addObject("listaFuncionarios", funcionarioRepositorio.findAll());
+        mv.addObject("listaProdutos", produtoRepositorio.findAll());
         return mv;
     }
     
@@ -54,14 +64,27 @@ public class EntradaProdutoControle {
     // }
 
     @PostMapping("/administrativo/entrada/salvar")
-    public ModelAndView salvar(String acao, EntradaProduto entrada, List<EntradaItens> listaEntrada, EntradaItens entradaItens ) {
+    public ModelAndView salvar(String acao, EntradaProduto entrada, EntradaItens entradaItens ) {
         
         if(acao.equals("itens")){
-            listaEntrada.add(entradaItens);
-
+            this.listaEntrada.add(entradaItens);
+        }else if(acao.equals("salvar")){
+            entradaProdutoRepositorio.saveAndFlush(entrada);
+            for(entradaItens it:listaEntrada){
+                it.setEntrada(entrada);
+                entradaItensRepositorio.saveAndFlush(it);
+                Optional<Produto> produto = produtoRepositorio.findById(it.getProduto().getId());
+                Produto produto = prod.get();
+                produto.setQuantidadeEstoque(produto.getQuantidadeEstoque() + it.getQuantidade());
+                produto.setvalorVenda(it.getvalorVenda());
+                produtoRepositorio.saveAndFlush(produto);
+                this.listaEntrada = new ArrayList<>();
+            }
+            return cadastrar(new EntradaProduto(), new EntradaItens());
         }
+        System.out.println(this.listaEntrada.size());
 
 
-        return cadastrar(entrada, listaEntrada, new EntradaItens());
+        return cadastrar(entrada, new EntradaItens());
     }
 }
