@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import com.dev.loja.modelos.Cidade;
 import com.dev.loja.repositorios.CidadeRepositorio;
+import com.dev.loja.repositorios.EstadoRepositorio;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,31 +23,31 @@ public class CidadeControle {
     private CidadeRepositorio cidadeRepositorio;
 
     @Autowired
-    private EstadoRepositorio estado Repositorio;
-    
+    private EstadoRepositorio estadoRepositorio;
+
     @GetMapping("/administrativo/cidades/cadastrar")
-    public ModelAndView cadastrar(Cidade cidade){
+    public ModelAndView cadastrar(Cidade cidade) {
         ModelAndView mv = new ModelAndView("administrativo/cidades/cadastro");
         mv.addObject("cidade", cidade);
         mv.addObject("listaEstados", estadoRepositorio.findAll());
         return mv;
     }
-    
+
     @GetMapping("/administrativo/cidades/listar")
-    public ModelAndView listar(){
+    public ModelAndView listar() {
         ModelAndView mv = new ModelAndView("administrativo/cidades/lista");
         mv.addObject("listaCidades", cidadeRepositorio.findAll());
         return mv;
     }
 
     @GetMapping("/administrativo/cidades/editar/{id}")
-    public ModelAndView editar(@PathVariable("id") Long id){
+    public ModelAndView editar(@PathVariable("id") Long id) {
         Optional<Cidade> cidade = cidadeRepositorio.findById(id);
         return cadastrar(cidade.get());
     }
-    
+
     @GetMapping("/administrativo/cidades/remover/{id}")
-    public ModelAndView remover(@PathVariable("id") Long id){
+    public ModelAndView remover(@PathVariable("id") Long id) {
         Optional<Cidade> cidade = cidadeRepositorio.findById(id);
         cidadeRepositorio.delete(cidade.get());
         return listar();
@@ -54,7 +55,7 @@ public class CidadeControle {
 
     @PostMapping("/administrativo/cidades/salvar")
     public ModelAndView salvar(@Valid Cidade cidade, BindingResult result) {
-        if(result.hasErrors()){
+        if (result.hasErrors()) {
             return cadastrar(cidade);
         }
         cidadeRepositorio.saveAndFlush(cidade);

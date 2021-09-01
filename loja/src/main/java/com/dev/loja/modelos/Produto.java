@@ -1,21 +1,18 @@
 package com.dev.loja.modelos;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
-@Table(name="produto")
-public class Produto implements Serializable{
-    
-    public Produto() {
+@Table(name = "produto")
+public class Produto implements Serializable {
+
+	public Produto() {
 		super();
 	}
 
@@ -61,7 +58,7 @@ public class Produto implements Serializable{
 	public void setCategoria(String categoria) {
 		this.categoria = categoria;
 	}
-	
+
 	public String getMarca() {
 		return marca;
 	}
@@ -69,7 +66,7 @@ public class Produto implements Serializable{
 	public void setMarca(String marca) {
 		this.marca = marca;
 	}
-	
+
 	public Double getQuantidadeEstoque() {
 		return quantidadeEstoque;
 	}

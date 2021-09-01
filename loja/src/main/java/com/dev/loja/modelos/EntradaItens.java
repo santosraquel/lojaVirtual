@@ -1,21 +1,19 @@
 package com.dev.loja.modelos;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
-@Table(name="entrada_itens")
-public class EntradaItens implements Serializable{
-    
-    public Produto() {
+@Table(name = "entrada_itens")
+public class EntradaItens implements Serializable {
+
+	public EntradaItens() {
 		super();
 	}
 
@@ -32,6 +30,13 @@ public class EntradaItens implements Serializable{
 	private Double valorProduto = 0.;
 	private Double valorVenda = 0.;
 
+	public Double getValorVenda() {
+		return valorVenda;
+	}
+
+	public void setValorVenda(Double valorVenda) {
+		this.valorVenda = valorVenda;
+	}
 
 	public Long getId() {
 		return id;
@@ -39,6 +44,22 @@ public class EntradaItens implements Serializable{
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public EntradaProduto getEntrada() {
+		return entrada;
+	}
+
+	public void setEntrada(EntradaProduto entrada) {
+		this.entrada = entrada;
+	}
+
+	public Produto getProduto() {
+		return produto;
+	}
+
+	public void setProduto(Produto produto) {
+		this.produto = produto;
 	}
 
 	public Double getQuantidade() {
@@ -57,28 +78,4 @@ public class EntradaItens implements Serializable{
 		this.valorProduto = valorProduto;
 	}
 
-	public Double getValorVenda() {
-		return valorVenda;
-	}
-
-	public void setValorVenda(Double valorVenda) {
-		this.valorVenda = valorVenda;
-	}
-	
-	public EntradaProduto getEntrada() {
-		return entrada;
-	}
-
-	public void setEntrada(EntradaProduto entrada) {
-		this.entrada = entrada;
-	}
-	public EntradaProduto getEntrada() {
-		return entrada;
-	}
-
-	public void setEntrada(EntradaProduto entrada) {
-		this.entrada = entrada;
-	}
-	
-	
 }

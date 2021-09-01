@@ -7,15 +7,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name="funcionario")
-public class Funcionario implements Serializable{
-    
-    public Funcionario() {
+@Table(name = "funcionario")
+public class Funcionario implements Serializable {
+
+	public Funcionario() {
 		super();
 	}
 
@@ -26,9 +27,9 @@ public class Funcionario implements Serializable{
 
 	private String nome;
 	private Double salarioBruto;
-    @Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.DATE)
 	private Date dataEntrada;
-    @Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.DATE)
 	private Date dataSaida;
 	private String cargo;
 	@ManyToOne
@@ -41,8 +42,8 @@ public class Funcionario implements Serializable{
 	private String cep;
 	private String email;
 	private String senha;
-	
-    public String getEmail() {
+
+	public String getEmail() {
 		return email;
 	}
 
@@ -107,12 +108,12 @@ public class Funcionario implements Serializable{
 	}
 
 	public Cidade getCidade() {
-        return cidade;
-    }
+		return cidade;
+	}
 
-    public void setCidade(Cidade cidade) {
-        this.cidade = cidade;
-    }
+	public void setCidade(Cidade cidade) {
+		this.cidade = cidade;
+	}
 
 	public String getLogradouro() {
 		return logradouro;
@@ -161,5 +162,5 @@ public class Funcionario implements Serializable{
 	public void setCep(String cep) {
 		this.cep = cep;
 	}
-	
+
 }
