@@ -5,7 +5,6 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import com.dev.loja.modelos.Papel;
-import com.dev.loja.modelos.Papel;
 import com.dev.loja.repositorios.PapelRepositorio;
 
 import org.springframework.beans.factory.annotation.Autowired;
