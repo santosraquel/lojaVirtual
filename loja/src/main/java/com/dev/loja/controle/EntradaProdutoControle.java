@@ -4,20 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import com.dev.loja.modelos.EntradaItens;
-import com.dev.loja.modelos.EntradaProduto;
-import com.dev.loja.modelos.Produto;
-import com.dev.loja.repositorios.EntradaItensRepositorio;
-import com.dev.loja.repositorios.EntradaProdutoRepositorio;
-import com.dev.loja.repositorios.FuncionarioRepositorio;
-import com.dev.loja.repositorios.ProdutoRepositorio;
+import javax.validation.Valid;
 
+import org.aspectj.weaver.VersionedDataInputStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.dev.loja.modelos.EntradaItens;
+import com.dev.loja.modelos.EntradaProduto;
+import com.dev.loja.modelos.Produto;
+import com.dev.loja.modelos.Estado;
+import com.dev.loja.repositorios.EntradaItensRepositorio;
+import com.dev.loja.repositorios.EntradaProdutoRepositorio;
+import com.dev.loja.repositorios.EstadoRepositorio;
+import com.dev.loja.repositorios.FuncionarioRepositorio;
+import com.dev.loja.repositorios.ProdutoRepositorio;
 
 @Controller
 public class EntradaProdutoControle {
@@ -47,25 +53,25 @@ public class EntradaProdutoControle {
         return mv;
     }
 
-    @GetMapping("/administrativo/entrada/listar")
-    public ModelAndView listar() {
-        ModelAndView mv = new ModelAndView("administrativo/produtos/lista");
-        mv.addObject("listaProdutos", produtoRepositorio.findAll());
-        return mv;
-    }
-
-    // @GetMapping("/administrativo/produtos/editar/{id}")
-    // public ModelAndView editar(@PathVariable("id") Long id) {
-    // Optional<Produto> produto = produtoRepositorio.findById(id);
-    // return cadastrar(produto.get());
+    // @GetMapping("/administrativo/estados/listar")
+    // public ModelAndView listar() {
+    // ModelAndView mv=new ModelAndView("administrativo/estados/lista");
+    // mv.addObject("listaEstados", estadoRepositorio.findAll());
+    // return mv;
     // }
 
-    @GetMapping("/administrativo/entrada/remover/{id}")
-    public ModelAndView remover(@PathVariable("id") Long id) {
-        Optional<Produto> produto = produtoRepositorio.findById(id);
-        produtoRepositorio.delete(produto.get());
-        return listar();
-    }
+    // @GetMapping("/administrativo/estados/editar/{id}")
+    // public ModelAndView editar(@PathVariable("id") Long id) {
+    // Optional<Estado> estado = estadoRepositorio.findById(id);
+    // return cadastrar(estado.get());
+    // }
+
+    // @GetMapping("/administrativo/estados/remover/{id}")
+    // public ModelAndView remover(@PathVariable("id") Long id) {
+    // Optional<Estado> estado = estadoRepositorio.findById(id);
+    // estadoRepositorio.delete(estado.get());
+    // return listar();
+    // }
 
     @PostMapping("/administrativo/entrada/salvar")
     public ModelAndView salvar(String acao, EntradaProduto entrada, EntradaItens entradaItens) {
@@ -89,4 +95,5 @@ public class EntradaProdutoControle {
 
         return cadastrar(entrada, new EntradaItens());
     }
+
 }

@@ -4,9 +4,6 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
-import com.dev.loja.modelos.Papel;
-import com.dev.loja.repositorios.PapelRepositorio;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -14,6 +11,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.dev.loja.modelos.Papel;
+import com.dev.loja.repositorios.PapelRepositorio;
+import com.dev.loja.repositorios.FuncionarioRepositorio;
 
 @Controller
 public class PapelControle {
@@ -50,10 +51,13 @@ public class PapelControle {
 
     @PostMapping("/administrativo/papeis/salvar")
     public ModelAndView salvar(@Valid Papel papel, BindingResult result) {
+
         if (result.hasErrors()) {
             return cadastrar(papel);
         }
         papelRepositorio.saveAndFlush(papel);
+
         return cadastrar(new Papel());
     }
+
 }

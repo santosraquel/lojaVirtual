@@ -4,17 +4,18 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
-import com.dev.loja.modelos.Funcionario;
-import com.dev.loja.repositorios.CidadeRepositorio;
-import com.dev.loja.repositorios.FuncionarioRepositorio;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.dev.loja.modelos.Funcionario;
+import com.dev.loja.repositorios.CidadeRepositorio;
+import com.dev.loja.repositorios.FuncionarioRepositorio;
 
 @Controller
 public class FuncionarioControle {
@@ -55,10 +56,15 @@ public class FuncionarioControle {
 
     @PostMapping("/administrativo/funcionarios/salvar")
     public ModelAndView salvar(@Valid Funcionario funcionario, BindingResult result) {
+
+        // System.out.println(result.getAllErrors());
         if (result.hasErrors()) {
             return cadastrar(funcionario);
         }
+        funcionario.setSenha(new BCryptPasswordEncoder().encode(funcionario.getSenha()));
         funcionarioRepositorio.saveAndFlush(funcionario);
+
         return cadastrar(new Funcionario());
     }
+
 }
